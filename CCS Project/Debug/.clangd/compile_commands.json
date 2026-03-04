@@ -1,0 +1,47 @@
+[
+   {
+      "directory" : "C:/Users/User/workspace_ccstheia/CCS Project/Debug",
+      "command"   : "clang++ -I\"D:/CCS Texas/ccs/ccs_base/msp430/include\" -I\"C:/Users/User/workspace_ccstheia/CCS Project\" -I\"C:/Users/User/workspace_ccstheia/CCS Project/include\" -I\"D:/CCS Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR6989__ -D_MPU_ENABLE -D__ENABLE_GUI_COMM=1 -DGLOBAL_Q=8 -xc",
+      "file"      : "C:/Users/User/workspace_ccstheia/CCS Project/GUIComm_JSON.c"
+   },
+   {
+      "directory" : "C:/Users/User/workspace_ccstheia/CCS Project/Debug",
+      "command"   : "clang++ -I\"D:/CCS Texas/ccs/ccs_base/msp430/include\" -I\"C:/Users/User/workspace_ccstheia/CCS Project\" -I\"C:/Users/User/workspace_ccstheia/CCS Project/include\" -I\"D:/CCS Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR6989__ -D_MPU_ENABLE -D__ENABLE_GUI_COMM=1 -DGLOBAL_Q=8 -xc",
+      "file"      : "C:/Users/User/workspace_ccstheia/CCS Project/callbacks_JSON.c"
+   },
+   {
+      "directory" : "C:/Users/User/workspace_ccstheia/CCS Project/Debug",
+      "command"   : "clang++ -I\"D:/CCS Texas/ccs/ccs_base/msp430/include\" -I\"C:/Users/User/workspace_ccstheia/CCS Project\" -I\"C:/Users/User/workspace_ccstheia/CCS Project/include\" -I\"D:/CCS Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR6989__ -D_MPU_ENABLE -D__ENABLE_GUI_COMM=1 -DGLOBAL_Q=8 -xc",
+      "file"      : "C:/Users/User/workspace_ccstheia/CCS Project/main.c"
+   },
+   {
+      "directory" : "C:/Users/User/workspace_ccstheia/CCS Project/Debug",
+      "command"   : "clang++ -I\"D:/CCS Texas/ccs/ccs_base/msp430/include\" -I\"C:/Users/User/workspace_ccstheia/CCS Project\" -I\"C:/Users/User/workspace_ccstheia/CCS Project/include\" -I\"D:/CCS Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR6989__ -D_MPU_ENABLE -D__ENABLE_GUI_COMM=1 -DGLOBAL_Q=8 -xc",
+      "file"      : "C:/Users/User/workspace_ccstheia/CCS Project/src/Extra/MSP430_GUI/GUI_JSON.c"
+   },
+   {
+      "directory" : "C:/Users/User/workspace_ccstheia/CCS Project/Debug",
+      "command"   : "clang++ -I\"D:/CCS Texas/ccs/ccs_base/msp430/include\" -I\"C:/Users/User/workspace_ccstheia/CCS Project\" -I\"C:/Users/User/workspace_ccstheia/CCS Project/include\" -I\"D:/CCS Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR6989__ -D_MPU_ENABLE -D__ENABLE_GUI_COMM=1 -DGLOBAL_Q=8 -xc",
+      "file"      : "C:/Users/User/workspace_ccstheia/CCS Project/src/Extra/MSP430_GUI/jsmn/jsmn.c"
+   },
+   {
+      "directory" : "C:/Users/User/workspace_ccstheia/CCS Project/Debug",
+      "command"   : "clang++ -I\"D:/CCS Texas/ccs/ccs_base/msp430/include\" -I\"C:/Users/User/workspace_ccstheia/CCS Project\" -I\"C:/Users/User/workspace_ccstheia/CCS Project/include\" -I\"D:/CCS Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR6989__ -D_MPU_ENABLE -D__ENABLE_GUI_COMM=1 -DGLOBAL_Q=8 -xc",
+      "file"      : "C:/Users/User/workspace_ccstheia/CCS Project/src/Extra/MSP430_HAL/HAL_GUIComm_UART_FR698x.c"
+   },
+   {
+      "directory" : "C:/Users/User/workspace_ccstheia/CCS Project/Debug",
+      "command"   : "clang++ -I\"D:/CCS Texas/ccs/ccs_base/msp430/include\" -I\"C:/Users/User/workspace_ccstheia/CCS Project\" -I\"C:/Users/User/workspace_ccstheia/CCS Project/include\" -I\"D:/CCS Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR6989__ -D_MPU_ENABLE -D__ENABLE_GUI_COMM=1 -DGLOBAL_Q=8 -xc",
+      "file"      : "C:/Users/User/workspace_ccstheia/CCS Project/src/Extra/MSP430_HAL/HAL_IO_FR698x.c"
+   },
+   {
+      "directory" : "C:/Users/User/workspace_ccstheia/CCS Project/Debug",
+      "command"   : "clang++ -I\"D:/CCS Texas/ccs/ccs_base/msp430/include\" -I\"C:/Users/User/workspace_ccstheia/CCS Project\" -I\"C:/Users/User/workspace_ccstheia/CCS Project/include\" -I\"D:/CCS Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR6989__ -D_MPU_ENABLE -D__ENABLE_GUI_COMM=1 -DGLOBAL_Q=8 -xc",
+      "file"      : "C:/Users/User/workspace_ccstheia/CCS Project/src/Extra/MSP430_HAL/HAL_System_FR698x.c"
+   },
+   {
+      "directory" : "C:/Users/User/workspace_ccstheia/CCS Project/Debug",
+      "command"   : "clang++ -I\"D:/CCS Texas/ccs/ccs_base/msp430/include\" -I\"C:/Users/User/workspace_ccstheia/CCS Project\" -I\"C:/Users/User/workspace_ccstheia/CCS Project/include\" -I\"D:/CCS Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR6989__ -D_MPU_ENABLE -D__ENABLE_GUI_COMM=1 -DGLOBAL_Q=8 -xc",
+      "file"      : "C:/Users/User/workspace_ccstheia/CCS Project/src/Extra/MSP430_HAL/HAL_Timer_FR698x.c"
+   }
+]
