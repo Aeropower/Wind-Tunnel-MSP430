@@ -106,8 +106,9 @@ S62_DEPS__QUOTED :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
-src/Extra/IQMathLib/CCS/MPY32/5xx_6xx \
-src/Extra/MSP430_GUI \
-src/Extra/MSP430_GUI/jsmn \
-src/Extra/MSP430_HAL \
+src/5xx_6xx \
+src/MSP430_GUI \
+src/MSP430_GUI/jsmn \
+src/MSP430_HAL \
+src \
 

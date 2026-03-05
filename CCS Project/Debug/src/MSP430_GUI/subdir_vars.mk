@@ -6,21 +6,21 @@ SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/Extra/MSP430_GUI/jsmn/jsmn.c 
+../src/MSP430_GUI/GUI_JSON.c 
 
 C_DEPS += \
-./src/Extra/MSP430_GUI/jsmn/jsmn.d 
+./src/MSP430_GUI/GUI_JSON.d 
 
 OBJS += \
-./src/Extra/MSP430_GUI/jsmn/jsmn.obj 
+./src/MSP430_GUI/GUI_JSON.obj 
 
 OBJS__QUOTED += \
-"src\Extra\MSP430_GUI\jsmn\jsmn.obj" 
+"src\MSP430_GUI\GUI_JSON.obj" 
 
 C_DEPS__QUOTED += \
-"src\Extra\MSP430_GUI\jsmn\jsmn.d" 
+"src\MSP430_GUI\GUI_JSON.d" 
 
 C_SRCS__QUOTED += \
-"../src/Extra/MSP430_GUI/jsmn/jsmn.c" 
+"../src/MSP430_GUI/GUI_JSON.c" 
 
 

@@ -10,24 +10,21 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./GUIComm_JSON.obj" \
-"./callbacks_JSON.obj" \
-"./main.obj" \
-"./src/Extra/MSP430_GUI/GUI_JSON.obj" \
-"./src/Extra/MSP430_GUI/jsmn/jsmn.obj" \
-"./src/Extra/MSP430_HAL/HAL_GUIComm_UART_FR698x.obj" \
-"./src/Extra/MSP430_HAL/HAL_IO_FR698x.obj" \
-"./src/Extra/MSP430_HAL/HAL_System_FR698x.obj" \
-"./src/Extra/MSP430_HAL/HAL_Timer_FR698x.obj" \
+"./src/MSP430_GUI/GUI_JSON.obj" \
+"./src/MSP430_GUI/jsmn/jsmn.obj" \
+"./src/MSP430_HAL/HAL_IO_FR698x.obj" \
+"./src/MSP430_HAL/HAL_System_FR698x.obj" \
+"./src/main.obj" \
+"./src/wind_speed_sensor.obj" \
 "../lnk_msp430fr6989.cmd" \
-"../src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/IQmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_large_data.lib" \
-"../src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/IQmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_restricted_data.lib" \
-"../src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/IQmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_small_data.lib" \
-"../src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/IQmathLib_CCS_MPY32_5xx_6xx_CPUX_small_code_small_data.lib" \
-"../src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/QmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_large_data.lib" \
-"../src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/QmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_restricted_data.lib" \
-"../src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/QmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_small_data.lib" \
-"../src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/QmathLib_CCS_MPY32_5xx_6xx_CPUX_small_code_small_data.lib" \
+"../src/5xx_6xx/IQmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_large_data.lib" \
+"../src/5xx_6xx/IQmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_restricted_data.lib" \
+"../src/5xx_6xx/IQmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_small_data.lib" \
+"../src/5xx_6xx/IQmathLib_CCS_MPY32_5xx_6xx_CPUX_small_code_small_data.lib" \
+"../src/5xx_6xx/QmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_large_data.lib" \
+"../src/5xx_6xx/QmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_restricted_data.lib" \
+"../src/5xx_6xx/QmathLib_CCS_MPY32_5xx_6xx_CPUX_large_code_small_data.lib" \
+"../src/5xx_6xx/QmathLib_CCS_MPY32_5xx_6xx_CPUX_small_code_small_data.lib" \
 $(GEN_CMDS__FLAG) \
 -llibmpu_init.a \
 -llibmath.a \
@@ -41,15 +38,17 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
--include src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/subdir_vars.mk
--include src/Extra/MSP430_GUI/subdir_vars.mk
--include src/Extra/MSP430_GUI/jsmn/subdir_vars.mk
--include src/Extra/MSP430_HAL/subdir_vars.mk
+-include src/5xx_6xx/subdir_vars.mk
+-include src/MSP430_GUI/subdir_vars.mk
+-include src/MSP430_GUI/jsmn/subdir_vars.mk
+-include src/MSP430_HAL/subdir_vars.mk
+-include src/subdir_vars.mk
 -include subdir_rules.mk
--include src/Extra/IQMathLib/CCS/MPY32/5xx_6xx/subdir_rules.mk
--include src/Extra/MSP430_GUI/subdir_rules.mk
--include src/Extra/MSP430_GUI/jsmn/subdir_rules.mk
--include src/Extra/MSP430_HAL/subdir_rules.mk
+-include src/5xx_6xx/subdir_rules.mk
+-include src/MSP430_GUI/subdir_rules.mk
+-include src/MSP430_GUI/jsmn/subdir_rules.mk
+-include src/MSP430_HAL/subdir_rules.mk
+-include src/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -161,8 +160,8 @@ CCS\ Project.out: $(OBJS) $(CMD_SRCS) $(A_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "GUIComm_JSON.obj" "callbacks_JSON.obj" "main.obj" "src\Extra\MSP430_GUI\GUI_JSON.obj" "src\Extra\MSP430_GUI\jsmn\jsmn.obj" "src\Extra\MSP430_HAL\HAL_GUIComm_UART_FR698x.obj" "src\Extra\MSP430_HAL\HAL_IO_FR698x.obj" "src\Extra\MSP430_HAL\HAL_System_FR698x.obj" "src\Extra\MSP430_HAL\HAL_Timer_FR698x.obj" 
-	-$(RM) "GUIComm_JSON.d" "callbacks_JSON.d" "main.d" "src\Extra\MSP430_GUI\GUI_JSON.d" "src\Extra\MSP430_GUI\jsmn\jsmn.d" "src\Extra\MSP430_HAL\HAL_GUIComm_UART_FR698x.d" "src\Extra\MSP430_HAL\HAL_IO_FR698x.d" "src\Extra\MSP430_HAL\HAL_System_FR698x.d" "src\Extra\MSP430_HAL\HAL_Timer_FR698x.d" 
+	-$(RM) "src\MSP430_GUI\GUI_JSON.obj" "src\MSP430_GUI\jsmn\jsmn.obj" "src\MSP430_HAL\HAL_IO_FR698x.obj" "src\MSP430_HAL\HAL_System_FR698x.obj" "src\main.obj" "src\wind_speed_sensor.obj" 
+	-$(RM) "src\MSP430_GUI\GUI_JSON.d" "src\MSP430_GUI\jsmn\jsmn.d" "src\MSP430_HAL\HAL_IO_FR698x.d" "src\MSP430_HAL\HAL_System_FR698x.d" "src\main.d" "src\wind_speed_sensor.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

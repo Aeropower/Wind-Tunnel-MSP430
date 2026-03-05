@@ -40,8 +40,12 @@ __interrupt void TIMER0_A1_ISR(void)
         case TA0IV_TACCR1:
         {
             uint16_t now = TA0CCR1;
+            
+            int i;
+            int k;
 
-            for (int i = CAPTURE_VALUES_BUFFER_CAPACITY - 1; i > 0; i--)
+
+            for (i = CAPTURE_VALUES_BUFFER_CAPACITY - 1; i > 0; i--)
                 captures[i] = captures[i-1];
             captures[0] = now;
 
@@ -50,7 +54,7 @@ __interrupt void TIMER0_A1_ISR(void)
             if (filled == CAPTURE_VALUES_BUFFER_CAPACITY)
             {
                 uint32_t sum = 0;
-                for (int k = 0; k < CAPTURE_VALUES_BUFFER_CAPACITY - 1; k++)
+                for (k = 0; k < CAPTURE_VALUES_BUFFER_CAPACITY - 1; k++)
                 {
                     uint16_t a = captures[k];
                     uint16_t b = captures[k+1];
