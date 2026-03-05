@@ -16,6 +16,9 @@ src/wind_speed_sensor.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1
 src/wind_speed_sensor.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h
 src/wind_speed_sensor.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h
 src/wind_speed_sensor.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h
+src/wind_speed_sensor.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/math.h
+src/wind_speed_sensor.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_defs.h
+src/wind_speed_sensor.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_limits.h
 src/wind_speed_sensor.obj: ../src/wind_speed_sensor.h
 
 ../src/wind_speed_sensor.c:
@@ -49,6 +52,12 @@ D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types
 D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h:
 
 D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
+
+D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/math.h:
+
+D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_defs.h:
+
+D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_limits.h:
 
 ../src/wind_speed_sensor.h:
 

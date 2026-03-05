@@ -106,8 +106,8 @@ S62_DEPS__QUOTED :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
+driverlib/MSP430FR5xx_6xx \
 src/5xx_6xx \
-src/MSP430_GUI \
 src/MSP430_GUI/jsmn \
 src/MSP430_HAL \
 src \

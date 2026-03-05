@@ -1,11 +1,10 @@
 #ifndef WIND_SPEED_SENSOR_H
 #define WIND_SPEED_SENSOR_H
-//CCS TRASH
 
-#include <stdint.h>
+void   WindSpeed_Init(void);
 
-void WindSpeed_Init(void);
+double WindSpeed_GetHz(void);
+double WindSpeed_GetRPM(void);
 double WindSpeed_GetMS(void);
-double WindSpeed_GetMPH(void);
 
 #endif
