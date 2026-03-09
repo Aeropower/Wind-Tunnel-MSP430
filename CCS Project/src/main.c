@@ -27,7 +27,9 @@
  * REFRESH_MS -> LCD refresh interval
  */
 #define HOLD_MS     800
-#define REFRESH_MS  250
+
+//IMPORTANT FOR VERIFYING THE SWITCH
+#define REFRESH_MS  50
 
 /*
  * =========================================================
@@ -116,42 +118,57 @@ static void show_rpm(double rpm)
     s6[5] = (char)('0' + (r % 10)); r /= 10;
     s6[4] = (char)('0' + (r % 10)); r /= 10;
     s6[3] = (char)('0' + (r % 10));
-    s6[6] = '\0';
 
     lcd_show6(s6);
 }
 
 /*
- * Format wind speed for the 6-character LCD using one decimal digit.
+ * Format wind speed for the 6-character LCD as an integer value.
  *
  * Example:
- *   5.6 m/s -> "WS 5 6"
+ *    WS 5
+ *    WS12
+ *    WS123
  *
- * Because the LCD is limited, this function avoids using decimal-point
- * segments and instead shows the integer and fractional parts separately.
- *
+ * Only integer values are displayed.
  * Negative values are clamped to 0.
- * Maximum displayed value is limited to 99.9.
+ * Values larger than 999 are limited to 999 to fit the LCD.
  */
-static void show_ws_1dec(double ms)
+static void show_ws(double ms)
 {
     if (ms < 0) ms = 0;
 
-    uint16_t v = (uint16_t)(ms * 10.0 + 0.5);
-    uint16_t ip = v / 10;
-    uint16_t fp = v % 10;
+    uint16_t v = (uint16_t)(ms + 0.5);   // round to nearest integer
 
-    if (ip > 99) { ip = 99; fp = 9; }
+    /* Limit the value so it fits on the LCD */
+    if (v > 999) v = 999;
 
     char s6[6];
+
     s6[0] = 'W';
     s6[1] = 'S';
 
-    s6[2] = (ip >= 10) ? (char)('0' + (ip / 10)) : ' ';
-    s6[3] = (char)('0' + (ip % 10));
-    s6[4] = ' ';
-    s6[5] = (char)('0' + fp);
-    s6[6] = '\0';
+    if (v < 10)
+    {
+        s6[2] = ' ';
+        s6[3] = ' ';
+        s6[4] = ' ';
+        s6[5] = '0' + v;
+    }
+    else if (v < 100)
+    {
+        s6[2] = ' ';
+        s6[3] = ' ';
+        s6[4] = '0' + (v / 10);
+        s6[5] = '0' + (v % 10);
+    }
+    else
+    {
+        s6[2] = ' ';
+        s6[3] = '0' + (v / 100);
+        s6[4] = '0' + ((v / 10) % 10);
+        s6[5] = '0' + (v % 10);
+    }
 
     lcd_show6(s6);
 }
@@ -266,7 +283,8 @@ int main(void)
             #endif
 
             if (g_mode == MODE_RPM) show_rpm(rpm);
-            else                    show_ws_1dec(ms);
+            
+            else                      show_ws(ms);
         }
 
         /*
