@@ -116,6 +116,7 @@ static void show_rpm(double rpm)
     s6[5] = (char)('0' + (r % 10)); r /= 10;
     s6[4] = (char)('0' + (r % 10)); r /= 10;
     s6[3] = (char)('0' + (r % 10));
+    s6[6] = '\0';
 
     lcd_show6(s6);
 }
@@ -150,6 +151,7 @@ static void show_ws_1dec(double ms)
     s6[3] = (char)('0' + (ip % 10));
     s6[4] = ' ';
     s6[5] = (char)('0' + fp);
+    s6[6] = '\0';
 
     lcd_show6(s6);
 }
