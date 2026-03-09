@@ -29,42 +29,101 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * --/COPYRIGHT--*/
+
 /*******************************************************************************
  *
  * hal_LCD.h
  *
- * Hardware abstraction layer for the FH-1138P Segmented LCD
- * on MSP-EXP430FR6989
+ * Hardware abstraction layer header for the FH-1138P segmented LCD
+ * on the MSP-EXP430FR6989 LaunchPad.
  *
- * February 2015
- * E. Chen
+ * This file provides:
+ * - LCD digit position definitions
+ * - External declarations for character lookup tables
+ * - Function prototypes for LCD control
  *
  ******************************************************************************/
 
 #ifndef OUTOFBOX_MSP430FR6989_HAL_LCD_H_
 #define OUTOFBOX_MSP430FR6989_HAL_LCD_H_
 
-//Change based on LCD Memory locations
-#define pos1 9   /* Digit A1 begins at S18 */
-#define pos2 5   /* Digit A2 begins at S10 */
-#define pos3 3   /* Digit A3 begins at S6  */
-#define pos4 18  /* Digit A4 begins at S36 */
-#define pos5 14  /* Digit A5 begins at S28 */
-#define pos6 7   /* Digit A6 begins at S14 */
+/*
+ * =========================================================
+ * LCD position mapping
+ * =========================================================
+ *
+ * These macros define the starting LCD memory index for each of the
+ * 6 visible character positions on the segmented LCD.
+ *
+ * The mapping is hardware-specific and depends on how the LCD glass
+ * is wired to the MSP430FR6989 LaunchPad.
+ *
+ * Position meaning:
+ * pos1 -> leftmost displayed character
+ * pos6 -> rightmost displayed character
+ */
+#define pos1 9   /* Digit A1 begins at segment S18 */
+#define pos2 5   /* Digit A2 begins at segment S10 */
+#define pos3 3   /* Digit A3 begins at segment S6  */
+#define pos4 18  /* Digit A4 begins at segment S36 */
+#define pos5 14  /* Digit A5 begins at segment S28 */
+#define pos6 7   /* Digit A6 begins at segment S14 */
 
-// Define word access definitions to LCD memories
+/*
+ * =========================================================
+ * LCD memory word access
+ * =========================================================
+ *
+ * LCDMEM is normally byte-addressed.
+ * This macro provides word-based access to LCD memory when needed.
+ */
 #ifndef LCDMEMW
-#define LCDMEMW    ((int*) LCDMEM) /* LCD Memory (for C) */
+#define LCDMEMW    ((int*) LCDMEM) /* LCD memory access as words */
 #endif
 
+/*
+ * =========================================================
+ * External shared variables / lookup tables
+ * =========================================================
+ *
+ * mode:
+ *   Global display mode variable used by some LCD helper functions
+ *   such as scrolling text.
+ *
+ * digit:
+ *   Lookup table used to display numeric digits (0-9).
+ *
+ * alphabetBig:
+ *   Lookup table used to display uppercase letters (A-Z).
+ */
 extern volatile unsigned char mode;
 extern const char digit[10][2];
 extern const char alphabetBig[26][2];
 
-void Init_LCD(void);
-void displayScrollText(char*);
-void showChar(char, int);
-void clearLCD(void);
+/*
+ * =========================================================
+ * LCD control function prototypes
+ * =========================================================
+ */
 
+/*
+ * Initialize and enable the segmented LCD peripheral.
+ */
+void Init_LCD(void);
+
+/*
+ * Scroll a message across the 6-character LCD display.
+ */
+void displayScrollText(char*);
+
+/*
+ * Display a single character at the specified LCD position.
+ */
+void showChar(char, int);
+
+/*
+ * Clear all visible LCD positions and related memory locations.
+ */
+void clearLCD(void);
 
 #endif /* OUTOFBOX_MSP430FR6989_HAL_LCD_H_ */

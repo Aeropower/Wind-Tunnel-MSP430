@@ -1,73 +1,75 @@
-/* --COPYRIGHT--,BSD
- * Copyright (c) 2019, Texas Instruments Incorporated
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * *  Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * *  Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- * *  Neither the name of Texas Instruments Incorporated nor the names of
- *    its contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * --/COPYRIGHT--*/
-//*****************************************************************************
-//      HAL functions to initialize the system
-//
-// Texas Instruments, Inc.
-// ******************************************************************************
-
 #include <Config_Common.h>
 #include "HAL.h"
 
-/**** Local Function Prototypes ***********************************************/
+/*
+ * Local function prototype:
+ * used only inside this file to configure the clock system.
+ */
 static void HAL_System_Clock_Init(void);
 
-/**** Functions ***************************************************************/
+/*
+ * HAL_System_Init
+ *
+ * Initializes the basic system hardware required by the application.
+ * This includes:
+ * - GPIO / port initialization
+ * - system clock initialization
+ *
+ * Returns:
+ *   0 -> initialization successful
+ */
 int8_t HAL_System_Init(void)
 {
-    HAL_IO_Init();
-    HAL_System_Clock_Init();
+    HAL_IO_Init();             // Configure all GPIO pins
+    HAL_System_Clock_Init();   // Configure CPU and peripheral clocks
 
     return 0;   // OK
 }
 
-/**** Local Functions *********************************************************/
-//! \brief Initializes the system clock
-//!
-//! \return none
+/*
+ * HAL_System_Clock_Init
+ *
+ * Configures the MSP430 clock system.
+ *
+ * Supported configuration:
+ * - CPU frequency   = 8 MHz
+ * - Low-speed bus   = 10 kHz
+ *
+ * Clock sources after setup:
+ * - MCLK  = DCOCLK = 8 MHz
+ * - SMCLK = DCOCLK = 8 MHz
+ * - ACLK  = VLOCLK
+ */
 static void HAL_System_Clock_Init(void)
 {
 #if ( (CPU_FREQ_HZ == 8000000) && (LSBUS_FREQ_HZ == 10000) )
-    // Clock System Setup
-    CSCTL0_H = CSKEY >> 8;                    // Unlock CS registers
-    CSCTL1 = DCOFSEL_6;                       // Set DCO to 8MHz
-    CSCTL2 = SELA__VLOCLK | SELS__DCOCLK | SELM__DCOCLK;  // Set SMCLK = MCLK = DCO
-                                            // ACLK = VLOCLK
-    CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1;     // Set all dividers to 1
-    CSCTL0_H = 0;                             // Lock CS registers
+
+    /* Unlock Clock System registers */
+    CSCTL0_H = CSKEY >> 8;
+
+    /* Set DCO (Digitally Controlled Oscillator) to 8 MHz */
+    CSCTL1 = DCOFSEL_6;
+
+    /*
+     * Select clock sources:
+     * - ACLK  = VLOCLK
+     * - SMCLK = DCOCLK
+     * - MCLK  = DCOCLK
+     */
+    CSCTL2 = SELA__VLOCLK | SELS__DCOCLK | SELM__DCOCLK;
+
+    /*
+     * Set clock dividers to 1:
+     * - ACLK  /1
+     * - SMCLK /1
+     * - MCLK  /1
+     */
+    CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1;
+
+    /* Lock Clock System registers */
+    CSCTL0_H = 0;
+
 #else
 #error "Clock configuration is not supported. Modify DualRaySmoke_HAL_System.c"
 #endif
 }
-
-
-

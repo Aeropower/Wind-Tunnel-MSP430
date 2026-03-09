@@ -1,84 +1,127 @@
 /* --COPYRIGHT--,BSD
  * Copyright (c) 2019, Texas Instruments Incorporated
  * All rights reserved.
+ */
+
+/******************************************************************************
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * HAL_Config_Private.h
  *
- * *  Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ * Private configuration file for the MSP430 HAL.
  *
- * *  Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
+ * Purpose of this file:
+ * - Define internal configuration parameters for the HAL
+ * - Configure UART communication used for GUI/debug communication
+ * - Map generic HAL register names to the correct MSP430 UART registers
  *
- * *  Neither the name of Texas Instruments Incorporated nor the names of
- *    its contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
+ * NOTE:
+ * This file is intended for internal HAL configuration and normally
+ * should not be modified by application code.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * --/COPYRIGHT--*/
-//*****************************************************************************
-//  MSP430 HAL Configuration
-//
-//  Static and default configuration of Library
-// Texas Instruments, Inc.
+ ******************************************************************************/
+
 #ifndef __CONFIG_PRIVATE_H__
 #define __CONFIG_PRIVATE_H__
 
 #include "Config_Common.h"
 
-//*********** GUI Communication ************************************************
-//! \brief baudrate of GUI Communication port
-//!         i.e. 19200 = 19,200bps
-//!
-#define HAL_GUICOMM_BAUDRATE              (9600)
+/*
+ * =========================================================
+ * GUI Communication Configuration
+ * =========================================================
+ *
+ * Defines the UART settings used for communication between
+ * the MSP430 and an external GUI or serial interface.
+ */
 
-//! \brief Select which eUSCI to use with UART
+/*
+ * UART communication baud rate.
+ *
+ * Example:
+ * 9600 = 9600 bits per second
+ */
+#define HAL_GUICOMM_BAUDRATE (9600)
+
+
+/*
+ * Select which eUSCI_A module is used for UART communication.
+ *
+ * MSP430FR6989 provides multiple UART modules:
+ *   UCA0
+ *   UCA1
+ *
+ * Setting:
+ *   0 → use UCA0
+ *   1 → use UCA1
+ */
 #define GUI_COMM_UART_EUSCI (1)
 
-#if (GUI_COMM_UART_EUSCI == 0)
-#define UCAnBR0            (UCA0BR0)
-#define UCAnBR1            (UCA0BR1)
-#define UCAnCTLW0          (UCA0CTLW0)
-#define UCAnIE             (UCA0IE)
-#define UCAnIFG            (UCA0IFG)
-#define UCAnIV             (UCA0IV)
-#define UCAnMCTLW          (UCA0MCTLW)
-#define UCAnSTATW          (UCA0STATW)
-#define UCAnTXBUF          (UCA0TXBUF)
-#define UCAnRXBUF          (UCA0RXBUF)
 
-#define USCI_An_VECTOR     (USCI_A0_VECTOR)
-#define USCI_An_ISR        (USCI_A0_ISR)
+/*
+ * =========================================================
+ * UART Register Mapping
+ * =========================================================
+ *
+ * The HAL uses generic register names (UCAnXXXX).
+ * These macros map them to the correct hardware registers
+ * depending on which UART module is selected.
+ *
+ * This allows the HAL code to remain portable without
+ * hardcoding UCA0 or UCA1 everywhere.
+ */
+
+#if (GUI_COMM_UART_EUSCI == 0)
+
+/*
+ * Map generic register names to UART module A0 registers
+ */
+
+#define UCAnBR0    (UCA0BR0)     /* Baud rate register low byte */
+#define UCAnBR1    (UCA0BR1)     /* Baud rate register high byte */
+#define UCAnCTLW0  (UCA0CTLW0)   /* Control register */
+#define UCAnIE     (UCA0IE)      /* Interrupt enable register */
+#define UCAnIFG    (UCA0IFG)     /* Interrupt flag register */
+#define UCAnIV     (UCA0IV)      /* Interrupt vector register */
+#define UCAnMCTLW  (UCA0MCTLW)   /* Modulation control register */
+#define UCAnSTATW  (UCA0STATW)   /* Status register */
+#define UCAnTXBUF  (UCA0TXBUF)   /* Transmit buffer */
+#define UCAnRXBUF  (UCA0RXBUF)   /* Receive buffer */
+
+/* UART interrupt vector and ISR name */
+#define USCI_An_VECTOR (USCI_A0_VECTOR)
+#define USCI_An_ISR    (USCI_A0_ISR)
+
+
 #elif (GUI_COMM_UART_EUSCI == 1)
 
-#define UCAnBR0            (UCA1BR0)
-#define UCAnBR1            (UCA1BR1)
-#define UCAnCTLW0          (UCA1CTLW0)
-#define UCAnIE             (UCA1IE)
-#define UCAnIFG            (UCA1IFG)
-#define UCAnIV             (UCA1IV)
-#define UCAnMCTLW          (UCA1MCTLW)
-#define UCAnSTATW          (UCA1STATW)
-#define UCAnTXBUF          (UCA1TXBUF)
-#define UCAnRXBUF          (UCA1RXBUF)
+/*
+ * Map generic register names to UART module A1 registers
+ */
 
-#define USCI_An_VECTOR     (USCI_A1_VECTOR)
-#define USCI_An_ISR        (USCI_A1_ISR)
+#define UCAnBR0    (UCA1BR0)     /* Baud rate register low byte */
+#define UCAnBR1    (UCA1BR1)     /* Baud rate register high byte */
+#define UCAnCTLW0  (UCA1CTLW0)   /* Control register */
+#define UCAnIE     (UCA1IE)      /* Interrupt enable register */
+#define UCAnIFG    (UCA1IFG)     /* Interrupt flag register */
+#define UCAnIV     (UCA1IV)      /* Interrupt vector register */
+#define UCAnMCTLW  (UCA1MCTLW)   /* Modulation control register */
+#define UCAnSTATW  (UCA1STATW)   /* Status register */
+#define UCAnTXBUF  (UCA1TXBUF)   /* Transmit buffer */
+#define UCAnRXBUF  (UCA1RXBUF)   /* Receive buffer */
+
+/* UART interrupt vector and ISR name */
+#define USCI_An_VECTOR (USCI_A1_VECTOR)
+#define USCI_An_ISR    (USCI_A1_ISR)
+
+
 #else
+
+/*
+ * If an invalid UART module number is selected,
+ * stop compilation and notify the developer.
+ */
 #error "eUSCI is not defined. Modify HAL layer"
+
 #endif
 
 #endif //__CONFIG_PRIVATE_H__
