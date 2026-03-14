@@ -27,8 +27,6 @@
  * REFRESH_MS -> LCD refresh interval
  */
 #define HOLD_MS     800
-
-//IMPORTANT FOR VERIFYING THE SWITCH
 #define REFRESH_MS  50
 
 /*
@@ -37,17 +35,16 @@
  * =========================================================
  * TEST_MODE = 1:
  *   Use simulated sine-wave values for RPM and wind speed.
- *   This is useful for testing the LCD and UI without a sensor.
  *
  * TEST_MODE = 0:
  *   Use real measurements from the anemometer.
  */
-#define TEST_MODE 1
+#define TEST_MODE 0
 
 /* Simulated signal parameters */
 #define TEST_PERIOD_SEC 5.0
-#define TEST_RPM_AMP    2000.0   // Simulated RPM range: about -2000 to +2000
-#define TEST_MS_AMP     100.0    // Simulated wind speed range: about -100 to +100 m/s
+#define TEST_RPM_AMP    2000.0   // 0 to 2000 to 0
+#define TEST_MS_AMP     100.0    // 0 to 100 to 0
 
 /*
  * Approximate loop time step used to advance the simulated sine wave.
@@ -103,14 +100,13 @@ static void lcd_show6(const char s6[6])
 /*
  * Format RPM for the 6-character LCD as:
  * "RPM###"
- *
- * Only the last 3 digits are shown.
- * Negative RPM values are clamped to 0 for display purposes.
  */
 static void show_rpm(double rpm)
 {
     uint16_t r = 0;
     if (rpm > 0) r = (uint16_t)(rpm + 0.5);
+
+    if (r > 999) r = 999;
 
     char s6[6];
     s6[0] = 'R'; s6[1] = 'P'; s6[2] = 'M';
@@ -124,23 +120,12 @@ static void show_rpm(double rpm)
 
 /*
  * Format wind speed for the 6-character LCD as an integer value.
- *
- * Example:
- *    WS 5
- *    WS12
- *    WS123
- *
- * Only integer values are displayed.
- * Negative values are clamped to 0.
- * Values larger than 999 are limited to 999 to fit the LCD.
  */
 static void show_ws(double ms)
 {
     if (ms < 0) ms = 0;
 
-    uint16_t v = (uint16_t)(ms + 0.5);   // round to nearest integer
-
-    /* Limit the value so it fits on the LCD */
+    uint16_t v = (uint16_t)(ms + 0.5);
     if (v > 999) v = 999;
 
     char s6[6];
@@ -153,29 +138,28 @@ static void show_ws(double ms)
         s6[2] = ' ';
         s6[3] = ' ';
         s6[4] = ' ';
-        s6[5] = '0' + v;
+        s6[5] = (char)('0' + v);
     }
     else if (v < 100)
     {
         s6[2] = ' ';
         s6[3] = ' ';
-        s6[4] = '0' + (v / 10);
-        s6[5] = '0' + (v % 10);
+        s6[4] = (char)('0' + (v / 10));
+        s6[5] = (char)('0' + (v % 10));
     }
     else
     {
         s6[2] = ' ';
-        s6[3] = '0' + (v / 100);
-        s6[4] = '0' + ((v / 10) % 10);
-        s6[5] = '0' + (v % 10);
+        s6[3] = (char)('0' + (v / 100));
+        s6[4] = (char)('0' + ((v / 10) % 10));
+        s6[5] = (char)('0' + (v % 10));
     }
 
     lcd_show6(s6);
 }
 
 /*
- * Keep the phase value bounded so it does not grow indefinitely
- * during long runs in test mode.
+ * Keep the phase value bounded so it does not grow indefinitely.
  */
 static double wrap_phase(double x)
 {
@@ -184,8 +168,10 @@ static double wrap_phase(double x)
 }
 
 /*
- * Generate simulated RPM and wind speed signals using a sine wave.
- * This function is only used when TEST_MODE == 1.
+ * Generate simulated RPM and wind speed signals.
+ * Output shape:
+ *   RPM: 0 -> 2000 -> 0
+ *   m/s: 0 -> 100  -> 0
  */
 static void get_test_signals(double *rpm_out, double *ms_out)
 {
@@ -194,18 +180,64 @@ static void get_test_signals(double *rpm_out, double *ms_out)
     const double w = (2.0 * 3.141592653589793) / TEST_PERIOD_SEC;
     phase = wrap_phase(phase + w * LOOP_DT_SEC);
 
-    const double s = sin(phase);
+    /* sine_val goes from -1 to +1 */
+    const double sine_val = sin(phase);
 
-    *rpm_out = TEST_RPM_AMP * s;
-    *ms_out  = TEST_MS_AMP  * s;
+    /* shift and scale so output goes from 0 to max to 0 */
+    *rpm_out = TEST_RPM_AMP * 0.5 * (1.0 + sine_val);
+    *ms_out  = TEST_MS_AMP  * 0.5 * (1.0 + sine_val);
+}
+
+static void red_blink_service(bool trigger)
+{
+    static uint16_t on_ms = 0;
+
+    if (trigger && on_ms == 0)
+    {
+        P1OUT |= LED_RED;
+        on_ms = 100;
+    }
+
+    if (on_ms)
+    {
+        on_ms--;
+        if (on_ms == 0)
+        {
+            P1OUT &= ~LED_RED;
+        }
+    }
+}
+
+static void show_label_rpm(void) { lcd_show6("RPM   "); }
+static void show_label_ws(void)  { lcd_show6("WS    "); }
+
+static void show_signed_1dec(double x)
+{
+    if (x > 99.9) x = 99.9;
+    if (x < -99.9) x = -99.9;
+
+    int neg = (x < 0);
+    if (neg) x = -x;
+
+    uint16_t v = (uint16_t)(x * 10.0 + 0.5);
+    uint16_t ip = v / 10;
+    uint16_t fp = v % 10;
+
+    char s6[6];
+    s6[0] = neg ? '-' : ' ';
+    s6[1] = (ip >= 10) ? (char)('0' + (ip / 10)) : ' ';
+    s6[2] = (char)('0' + (ip % 10));
+    s6[3] = ' ';
+    s6[4] = (char)('0' + fp);
+    s6[5] = ' ';
+
+    lcd_show6(s6);
 }
 
 int main(void)
 {
-    /* Stop the watchdog timer to prevent unwanted resets */
     WDTCTL = WDTPW | WDTHOLD;
 
-    /* Perform board/system initialization through the HAL */
     HAL_System_Init();
 
     /*
@@ -217,44 +249,41 @@ int main(void)
     leds_init();
     buttons_init();
 
-    /* Initialize the LCD and show a short startup message */
     Init_LCD();
     clearLCD();
     lcd_show6("READY ");
-    __delay_cycles(8000000);   // About 1 second at ~8 MHz
+    __delay_cycles(8000000);
     clearLCD();
 
-    /* Initialize wind-speed measurement module */
     WindSpeed_Init();
 
-    /* Enable global interrupts */
     __bis_SR_register(GIE);
 
-    uint16_t both_hold_ms = 0;      // How long both buttons have been held
-    bool toggled_this_hold = false; // Prevent multiple toggles during one hold
-    uint16_t refresh_ms = 0;        // LCD refresh timer
+    uint16_t both_hold_ms = 0;
+    bool toggled_this_hold = false;
+    uint16_t refresh_ms = 0;
 
     while (1)
     {
-        /* Base loop delay: about 1 ms */
-        __delay_cycles(8000);
+        double rpm, ms;
 
-        /* Red LED heartbeat: shows the firmware is running */
-        if ((refresh_ms % 100) == 0) P1OUT ^= LED_RED;
+        __delay_cycles(8000);   // about 1 ms
 
-        /*
-         * If both buttons are held long enough, toggle the display mode.
-         * This switches between RPM display and wind-speed display.
-         */
+        /* Button-hold logic */
         if (S1_Pressed() && S2_Pressed())
         {
-            if (both_hold_ms < 2000) both_hold_ms++;
+            if (both_hold_ms < HOLD_MS)
+            {
+                both_hold_ms++;
+            }
 
-            if (both_hold_ms >= HOLD_MS && !toggled_this_hold)
+            if ((both_hold_ms >= HOLD_MS) && !toggled_this_hold)
             {
                 g_mode = (g_mode == MODE_RPM) ? MODE_MS : MODE_RPM;
                 toggled_this_hold = true;
-                clearLCD();
+
+                if (g_mode == MODE_RPM) show_label_rpm();
+                else                    show_label_ws();
             }
         }
         else
@@ -263,36 +292,29 @@ int main(void)
             toggled_this_hold = false;
         }
 
-        /* Turn on the green LED whenever any button is pressed */
+        /* Green LED on when any button is pressed */
         if (S1_Pressed() || S2_Pressed()) P9OUT |= LED_GREEN;
         else                              P9OUT &= ~LED_GREEN;
 
-        /* Refresh the LCD periodically instead of every loop iteration */
+        /* Periodic LCD refresh */
         refresh_ms++;
         if (refresh_ms >= REFRESH_MS)
         {
             refresh_ms = 0;
 
-            double rpm, ms;
-
-            #if TEST_MODE
-                get_test_signals(&rpm, &ms);
-            #else
-                rpm = WindSpeed_GetRPM();
-                ms  = WindSpeed_GetMS();
-            #endif
+#if TEST_MODE
+            get_test_signals(&rpm, &ms);
+#else
+            rpm = WindSpeed_GetRPM();
+            ms  = WindSpeed_GetMS();
+#endif
 
             if (g_mode == MODE_RPM) show_rpm(rpm);
-            
-            else                      show_ws(ms);
+            else                    show_ws(ms);
         }
 
-        /*
-         * Enter low-power mode and wait for an interrupt to wake the CPU.
-         * The exact wake-up behavior depends on the ISR/HAL configuration.
-         */
-        __bis_SR_register(LPM3_bits | GIE);
-        __no_operation();
+        /* Optional blink service */
+        red_blink_service(false);
     }
 }
 

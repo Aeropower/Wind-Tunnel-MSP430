@@ -3,22 +3,22 @@
 src/hal_LCD.obj: ../src/hal_LCD.c
 src/hal_LCD.obj: ../driverlib/MSP430FR5xx_6xx/driverlib.h
 src/hal_LCD.obj: ../driverlib/MSP430FR5xx_6xx/inc/hw_memmap.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/ccs_base/msp430/include/msp430fr6989.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/ccs_base/msp430/include/in430.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics_legacy_undefs.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/ccs_base/msp430/include/msp430fr6989.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/ccs_base/msp430/include/in430.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics_legacy_undefs.h
 src/hal_LCD.obj: ../driverlib/MSP430FR5xx_6xx/deprecated/CCS/msp430fr5xx_6xxgeneric.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdint.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_ti_config.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/linkage.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_stdint40.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/stdint.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/cdefs.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_types.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdint.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_ti_config.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/linkage.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_stdint40.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/stdint.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/cdefs.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_types.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h
 src/hal_LCD.obj: ../driverlib/MSP430FR5xx_6xx/adc12_b.h
 src/hal_LCD.obj: ../driverlib/MSP430FR5xx_6xx/inc/hw_regaccess.h
 src/hal_LCD.obj: ../driverlib/MSP430FR5xx_6xx/aes256.h
@@ -49,8 +49,8 @@ src/hal_LCD.obj: ../driverlib/MSP430FR5xx_6xx/timer_b.h
 src/hal_LCD.obj: ../driverlib/MSP430FR5xx_6xx/tlv.h
 src/hal_LCD.obj: ../driverlib/MSP430FR5xx_6xx/wdt_a.h
 src/hal_LCD.obj: ../src/hal_LCD.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h
-src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h
+src/hal_LCD.obj: /Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h
 
 ../src/hal_LCD.c:
 
@@ -58,37 +58,37 @@ src/hal_LCD.obj: D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/inclu
 
 ../driverlib/MSP430FR5xx_6xx/inc/hw_memmap.h:
 
-D:/CCS\ Texas/ccs/ccs_base/msp430/include/msp430fr6989.h:
+/Applications/ti/ccs2041/ccs/ccs_base/msp430/include/msp430fr6989.h:
 
-D:/CCS\ Texas/ccs/ccs_base/msp430/include/in430.h:
+/Applications/ti/ccs2041/ccs/ccs_base/msp430/include/in430.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics_legacy_undefs.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics_legacy_undefs.h:
 
 ../driverlib/MSP430FR5xx_6xx/deprecated/CCS/msp430fr5xx_6xxgeneric.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdint.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdint.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_ti_config.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_ti_config.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/linkage.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/linkage.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_stdint40.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_stdint40.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/stdint.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/stdint.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/cdefs.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/cdefs.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_types.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_types.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h:
 
 ../driverlib/MSP430FR5xx_6xx/adc12_b.h:
 
@@ -150,7 +150,7 @@ D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h:
 
 ../src/hal_LCD.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h:
 
-D:/CCS\ Texas/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h:
+/Applications/ti/ccs2041/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h:
 
